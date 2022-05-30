@@ -1,17 +1,33 @@
 import { Modal } from "antd";
 import TextArea from "antd/lib/input/TextArea";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { LabelDescription } from "../styles";
 
 export const EditNotesModal = (props) => {
   const {label, title, show, noteBody, onCancel, onSubmit } = props;
-
   const [currentNoteText, setCurrentNoteText] = useState(noteBody);
+
+  useEffect(() => {
+
+
+    if (currentNoteText !== noteBody) {
+      console.log("currentNoteText",currentNoteText);
+      console.log("noteBody",noteBody);
+      const handleTabClose = (event) => {
+        event.preventDefault();
+        return (event.returnValue = "Are you sure you want to exit?");
+      };
+      window.addEventListener("beforeunload2", handleTabClose);
+      return () => {
+        window.removeEventListener("beforeunload2", handleTabClose);
+      };
+    }
+  }, [currentNoteText]);
   return (
     <Modal
       title={title}
       visible={show}
-      onOk={() => onSubmit(currentNoteText)}
+      onOk={() =>{ onSubmit(currentNoteText)}}
       onCancel={onCancel}
     >
       <LabelDescription >
