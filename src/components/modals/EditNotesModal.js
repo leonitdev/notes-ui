@@ -20,6 +20,7 @@ export const EditNotesModal = (props) => {
       };
     }
   }, [currentNoteText]);
+  
   return (
     <Modal
       title={title}
