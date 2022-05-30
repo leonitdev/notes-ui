@@ -9,17 +9,14 @@ export const EditNotesModal = (props) => {
 
   useEffect(() => {
 
-
-    if (currentNoteText !== noteBody) {
-      console.log("currentNoteText",currentNoteText);
-      console.log("noteBody",noteBody);
+    if (currentNoteText !==noteBody) {
       const handleTabClose = (event) => {
         event.preventDefault();
         return (event.returnValue = "Are you sure you want to exit?");
       };
-      window.addEventListener("beforeunload2", handleTabClose);
+      window.addEventListener("beforeunload", handleTabClose);
       return () => {
-        window.removeEventListener("beforeunload2", handleTabClose);
+        window.removeEventListener("beforeunload", handleTabClose);
       };
     }
   }, [currentNoteText]);
